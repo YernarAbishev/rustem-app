@@ -1,0 +1,18 @@
+.main {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/main.jpeg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+}
+.navigator {
+    padding: 20px 0;
+    background-color: #e8e8e8;
+    margin-bottom: 30px;
+}
+.navigator a {
+    text-decoration: none;
+}

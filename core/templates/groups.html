@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Сабақ кестесі{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="schedule">
+        <div class="navigator">
+            <div class="container">
+                <span><a href="{% url 'homePage' %}">Басты бет</a> / Сабақ кестесі</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="filter mb-5">
+                <h1 class="text-primary mb-3">Фильтр</h1>
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="{% url 'scheduleGroups' %}" class="btn btn-primary d-block">Барлық топтар</a>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dropdown">
+                            <a class="btn btn-primary d-block dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Курс
+                            </a>
+                            <ul class="dropdown-menu w-100">
+                                {% for course in courses %}
+                              <li><a class="dropdown-item" href="{% url 'lessonByCourse' slug=course.slug %}">{{course.courseName}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dropdown">
+                            <a class="btn btn-primary d-block dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Семестр
+                            </a>
+                            <ul class="dropdown-menu w-100">
+                                {% for term in terms %}
+                              <li><a class="dropdown-item" href="{% url 'lessonByTerm' slug=term.slug %}">{{ term.termName }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dropdown">
+                            <a class="btn btn-primary d-block dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Ауысым
+                            </a>
+                            <ul class="dropdown-menu w-100">
+                                {% for position in positions %}
+                              <li><a class="dropdown-item" href="{% url 'lessonByPosition' slug=position.slug %}">{{ position.positionName }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                {% for group in groups %}
+                <div class="col-md-3 mb-3">
+                    <a href="{% url 'scheduleDetail' pk=group.pk %}" style="text-decoration: none;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 style="text-align: center;">{{ group.groupName }}</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="schedule">
+        <div class="navigator">
+            <div class="container">
+                <span><a href="{% url 'homePage' %}">Басты бет</a> / Сабақ кестесі</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Қосымшамен жұмыс істеу үшін тіркеліңіз немесе кіріңіз</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

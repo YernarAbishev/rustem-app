@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Емтихан кестесі{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="schedule">
+        <div class="navigator">
+            <div class="container">
+                <span><a href="#">Басты бет</a> / <a href="#">Емтихан кестесі</a> / {{group.groupName}}</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>{{group.groupName}}</h3>
+                            <h4>Семестр: {{group.term.termName}}</h4>
+                            <h4>Ауысым: {{group.position.positionName}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-bordered mb-2">
+                        <tr>
+                            <td><h4>Сабақ атауы</h4></td>
+                            <td><h4>Мұғалім</h4></td>
+                            <td><h4>Кабинет</h4></td>
+                            <td><h4>Басталу уақыты мен күні</h4></td>
+                        </tr>
+                        {% for exam in exams %}
+                        <tr>
+                            <td><h4>{{exam.subject}}</h4></td>
+                            <td><h4>{{exam.teacher}}</h4></td>
+                            <td><h4>{{exam.cabinet}}</h4></td>
+                            <td><h4>{{exam.startDateTime}}</h4></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="schedule">
+        <div class="navigator">
+            <div class="container">
+                <span><a href="#">Басты бет</a> / Емтихан кестесі</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Қосымшамен жұмыс істеу үшін тіркеліңіз немесе кіріңіз</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

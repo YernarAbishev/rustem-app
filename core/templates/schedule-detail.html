@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}Сабақ кестесі{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="schedule">
+        <div class="navigator">
+            <div class="container">
+                <span><a href="{% url 'homePage' %}">Басты бет</a> / <a href="{% url 'scheduleGroups' %}">Сабақ кестесі</a> / {{group.groupName}}</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>{{group.groupName}}</h3>
+                            <h4>Семестр: {{group.term.termName}}</h4>
+                            <h4>Ауысым: {{group.position.positionName}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-bordered mb-2">
+                        <tr><th colspan="3"><h1>Дүйсенбі</h1></th></tr>
+                        {% for schedule in schedules %}
+                        {% if schedule.day.dayName == "Дүйсенбі" %}
+                        <tr>
+                            <td><h5>{{ schedule.lessonTime }}</h5></td>
+                            <td>
+                                <h5>{{schedule.subject}}</h5>
+                                <h5>{{schedule.teacher}}</h5>
+                            </td>
+                            <td><h5><span class="badge text-bg-primary">{{schedule.cabinet}}</span></h5></td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </table>
+                    <table class="table table-bordered mb-2">
+                        <tr><th colspan="3"><h1>Сейсенбі</h1></th></tr>
+                        {% for schedule in schedules %}
+                        {% if schedule.day.dayName == "Сейсенбі" %}
+                        <tr>
+                            <td><h5>{{ schedule.lessonTime }}</h5></td>
+                            <td>
+                                <h5>{{schedule.subject}}</h5>
+                                <h5>{{schedule.teacher}}</h5>
+                            </td>
+                            <td><h5><span class="badge text-bg-primary">{{schedule.cabinet}}</span></h5></td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </table>
+                    <table class="table table-bordered mb-2">
+                        <tr><th colspan="3"><h1>Сәрсенбі</h1></th></tr>
+                        {% for schedule in schedules %}
+                        {% if schedule.day.dayName == "Сәрсенбі" %}
+                        <tr>
+                            <td><h5>{{ schedule.lessonTime }}</h5></td>
+                            <td>
+                                <h5>{{schedule.subject}}</h5>
+                                <h5>{{schedule.teacher}}</h5>
+                            </td>
+                            <td><h5><span class="badge text-bg-primary">{{schedule.cabinet}}</span></h5></td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </table>
+                    <table class="table table-bordered mb-2">
+                        <tr><th colspan="3"><h1>Бейсенбі</h1></th></tr>
+                        {% for schedule in schedules %}
+                        {% if schedule.day.dayName == "Бейсенбі" %}
+                        <tr>
+                            <td><h5>{{ schedule.lessonTime }}</h5></td>
+                            <td>
+                                <h5>{{schedule.subject}}</h5>
+                                <h5>{{schedule.teacher}}</h5>
+                            </td>
+                            <td><h5><span class="badge text-bg-primary">{{schedule.cabinet}}</span></h5></td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </table>
+                    <table class="table table-bordered mb-2">
+                        <tr><th colspan="3"><h1>Жұма</h1></th></tr>
+                        {% for schedule in schedules %}
+                        {% if schedule.day.dayName == "Жұма" %}
+                        <tr>
+                            <td><h5>{{ schedule.lessonTime }}</h5></td>
+                            <td>
+                                <h5>{{schedule.subject}}</h5>
+                                <h5>{{schedule.teacher}}</h5>
+                            </td>
+                            <td><h5><span class="badge text-bg-primary">{{schedule.cabinet}}</span></h5></td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="schedule">
+        <div class="navigator">
+            <div class="container">
+                <span><a href="#">Басты бет</a> / Сабақ кестесі</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Қосымшамен жұмыс істеу үшін тіркеліңіз немесе кіріңіз</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
